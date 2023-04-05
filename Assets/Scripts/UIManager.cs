@@ -3,7 +3,9 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-	[SerializeField] GameObject panelMenu;
+	public GameObject panelMenu;
+	public Admob admob;
+	public PanelHandler panel;
 
 	void Awake ()
 	{
@@ -13,11 +15,13 @@ public class UIManager : MonoBehaviour
 	public void ShowMenu ()
 	{
 		panelMenu.SetActive (true);
+		admob.showNativeAd(panel.gameObject);
 	}
 
 	public void HideMenu ()
 	{
 		panelMenu.SetActive (false);
+		admob.requestForNewNativeAd();
 	}
 }
 

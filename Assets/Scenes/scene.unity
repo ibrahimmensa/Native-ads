@@ -263,7 +263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 34.799988, y: -36.69995}
+  m_AnchoredPosition: {x: 34.80005, y: -36.69995}
   m_SizeDelta: {x: 51.9, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &86537785
@@ -391,6 +391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelMenu: {fileID: 782139733}
+  admob: {fileID: 111194913}
+  panel: {fileID: 1118024018}
 --- !u!4 &111194912
 Transform:
   m_ObjectHideFlags: 0
@@ -418,12 +420,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f806876f85f1c246bb0bef2f756e46f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adNativePanel: {fileID: 1118024014}
-  adIcon: {fileID: 1478524978}
-  adChoices: {fileID: 438018107}
-  adHeadline: {fileID: 1140025910}
-  adCallToAction: {fileID: 1310798614}
-  adAdvertiser: {fileID: 2063725295}
+  adNativePanel: {fileID: 0}
+  nativePanel:
+    adIcon: {fileID: 0}
+    adChoices: {fileID: 0}
+    adHeadline: {fileID: 0}
+    adCallToAction: {fileID: 0}
+    adAdvertiser: {fileID: 0}
+  adIcon: {fileID: 0}
+  adChoices: {fileID: 0}
+  adHeadline: {fileID: 0}
+  adCallToAction: {fileID: 0}
+  adAdvertiser: {fileID: 0}
 --- !u!1 &116739785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,13 +1437,14 @@ GameObject:
   - component: {fileID: 1118024015}
   - component: {fileID: 1118024017}
   - component: {fileID: 1118024016}
+  - component: {fileID: 1118024018}
   m_Layer: 5
   m_Name: Panel_Ad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1118024015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1500,6 +1509,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118024014}
   m_CullTransparentMesh: 1
+--- !u!114 &1118024018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118024014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb17723b0057564a9af660deb195e36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelData:
+    adIcon: {fileID: 1478524978}
+    adChoices: {fileID: 438018107}
+    adHeadline: {fileID: 1140025910}
+    adCallToAction: {fileID: 1310798614}
+    adAdvertiser: {fileID: 2063725295}
 --- !u!1 &1140025908
 GameObject:
   m_ObjectHideFlags: 0

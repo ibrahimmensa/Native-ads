@@ -3,6 +3,16 @@ using UnityEngine.UI;
 using GoogleMobileAds.Api;
 using System;
 
+[Serializable]
+public class NativePanel
+{
+	public RawImage adIcon;
+	public RawImage adChoices;
+	public Text adHeadline;
+	public Text adCallToAction;
+	public Text adAdvertiser;
+}
+
 //Banner ad
 public class Admob : MonoBehaviour
 {
@@ -12,7 +22,8 @@ public class Admob : MonoBehaviour
 
 	private string idApp, idBanner, idNative;
 
-	[SerializeField] GameObject adNativePanel;
+	public GameObject adNativePanel;
+	public NativePanel nativePanel;
 	[SerializeField] RawImage adIcon;
 	[SerializeField] RawImage adChoices;
 	[SerializeField] Text adHeadline;
@@ -22,7 +33,8 @@ public class Admob : MonoBehaviour
 
 	void Awake ()
 	{
-		adNativePanel.SetActive (false); //hide ad panel
+		if(adNativePanel != null)
+			adNativePanel.SetActive (false); //hide ad panel
 	}
 
 	void Start ()
@@ -41,7 +53,7 @@ public class Admob : MonoBehaviour
 
 	void Update ()
 	{
-		if (nativeLoaded) {
+		if (nativeLoaded && adNativePanel !=null && nativePanel != null) {
 			nativeLoaded = false;
 
 			Texture2D iconTexture = this.adNative.GetIconTexture ();
@@ -49,18 +61,18 @@ public class Admob : MonoBehaviour
 			string headline = this.adNative.GetHeadlineText ();
 			string cta = this.adNative.GetCallToActionText ();
 			string advertiser = this.adNative.GetAdvertiserText ();
-			adIcon.texture = iconTexture;
-			adChoices.texture = iconAdChoices;
-			adHeadline.text = headline;
-			adAdvertiser.text = advertiser;
-			adCallToAction.text = cta;
+			nativePanel.adIcon.texture = iconTexture;
+			nativePanel.adChoices.texture = iconAdChoices;
+			nativePanel.adHeadline.text = headline;
+			nativePanel.adAdvertiser.text = advertiser;
+			nativePanel.adCallToAction.text = cta;
 
 			//register gameobjects
-			adNative.RegisterIconImageGameObject (adIcon.gameObject);
-			adNative.RegisterAdChoicesLogoGameObject (adChoices.gameObject);
-			adNative.RegisterHeadlineTextGameObject (adHeadline.gameObject);
-			adNative.RegisterCallToActionGameObject (adCallToAction.gameObject);
-			adNative.RegisterAdvertiserTextGameObject (adAdvertiser.gameObject);
+			adNative.RegisterIconImageGameObject (nativePanel.adIcon.gameObject);
+			adNative.RegisterAdChoicesLogoGameObject (nativePanel.adChoices.gameObject);
+			adNative.RegisterHeadlineTextGameObject (nativePanel.adHeadline.gameObject);
+			adNative.RegisterCallToActionGameObject (nativePanel.adCallToAction.gameObject);
+			adNative.RegisterAdvertiserTextGameObject (nativePanel.adAdvertiser.gameObject);
 
 			adNativePanel.SetActive (true); //show ad panel
 		}
@@ -110,6 +122,19 @@ public class Admob : MonoBehaviour
 	void OnDestroy ()
 	{
 		DestroyBannerAd ();
+	}
+
+	public void showNativeAd(GameObject nativePanel)
+	{
+		this.adNativePanel = nativePanel;
+		this.nativePanel = nativePanel.GetComponent<PanelHandler>().panelData;
+	}
+
+	public void requestForNewNativeAd()
+	{
+		RequestNativeAd();
+		this.adNativePanel = null;
+		this.nativePanel = null;
 	}
 
 }
